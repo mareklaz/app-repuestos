@@ -45,3 +45,36 @@ export async function getPartById(id) {
     return { success: false, message: 'Error al obtener la PIEZA' };
   }
 }
+
+export async function updatePart(data) {
+  try {
+    await connectDB();
+    console.log('DATA EN UPDATE =>', data);
+    const part = await Part.findByIdAndUpdate(data.id, data, {
+      new: true,
+    });
+    revalidatePath(`/parts/${data._id}`);
+    return {
+      success: true,
+      message: 'PIEZA actualizada correctamente',
+    };
+  } catch (error) {
+    console.log(error);
+    return { success: false, message: 'Error al actualizar la PIEZA' };
+  }
+}
+
+export async function deletePart(id) {
+  try {
+    await connectDB();
+    await Part.findByIdAndDelete(id);
+    revalidatePath('/parts');
+    return {
+      success: true,
+      message: 'PIEZA eliminada correctamente',
+    };
+  } catch (error) {
+    console.log(error);
+    return { success: false, message: 'Error al eliminar la PIEZA' };
+  }
+}

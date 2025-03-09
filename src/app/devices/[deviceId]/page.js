@@ -1,20 +1,20 @@
-import { getPartById } from '@/actions/partsActions';
+import { getDeviceById } from '@/actions/deviceActions';
 import ButtonBack from '@/components/buttons/ButtonBack';
 import LinkButton from '@/components/buttons/LinkButton';
-import DetailList from '@/components/detail/PartDetail';
+import DeviceDetail from '@/components/detail/DeviceDetail';
 import PageHeader from '@/components/PageHeader';
 import { IconEdit } from '@tabler/icons-react';
 
-export default async function PartDetailPage({ params }) {
-  const { partId } = await params;
-  const { data: part } = await getPartById(partId);
+export default async function DeviceDetailPage({ params }) {
+  const { deviceId } = params;
+  const { data: device } = await getDeviceById(deviceId);
 
   return (
     <>
-      <PageHeader title='Detalle de la Pieza'>
+      <PageHeader title='Detalle del Dispositivo'>
         <ButtonBack />
         <LinkButton
-          href={`/parts/${partId}/edit`}
+          href={`/devices/${deviceId}/edit`}
           className='ml-2 flex items-center gap-2'
         >
           <IconEdit className='size-5' />
@@ -22,7 +22,7 @@ export default async function PartDetailPage({ params }) {
         </LinkButton>
       </PageHeader>
       <div className='mx-auto max-w-5xl'>
-        <DetailList part={part} />
+        <DeviceDetail device={device} />
       </div>
     </>
   );
