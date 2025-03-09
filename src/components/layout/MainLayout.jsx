@@ -8,7 +8,7 @@ export default function MainLayout({ children }) {
   const { data: session, status } = useSession();
   const [sidebarOpen, setSidebarOpen] = useState(false);
 
-  if (!session) {
+  if (!session || status === 'loading') {
     return <div className='px-4 sm:px-6 lg:px-8'>{children}</div>;
   }
 

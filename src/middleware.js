@@ -43,6 +43,6 @@ export async function middleware(req) {
 export const config = {
   matcher: [
     // Se excluyen rutas que no requieren autenticación como assets estáticos
-    '/((?!_next/static|_next/image|favicon.ico).*)',
+    '/((?!_next/static|_next/image|favicon.ico|api).*)',
   ],
 };
